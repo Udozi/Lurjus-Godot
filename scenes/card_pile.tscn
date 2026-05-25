@@ -1,0 +1,8 @@
+[gd_scene format=3 uid="uid://83itocesu6hg"]
+
+[ext_resource type="Script" uid="uid://bbagvk4clpnf6" path="res://scripts/card_pile.gd" id="1_jmy31"]
+[ext_resource type="PackedScene" uid="uid://bskp8xtr1rvol" path="res://scenes/card.tscn" id="2_jmy31"]
+
+[node name="Deck" type="Node2D" unique_id=1059492093]
+script = ExtResource("1_jmy31")
+card_tscn = ExtResource("2_jmy31")

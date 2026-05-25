@@ -1,0 +1,49 @@
+[gd_scene format=3 uid="uid://baqqohdsduto6"]
+
+[ext_resource type="Script" uid="uid://eflr7wxemy78" path="res://scripts/level.gd" id="1_w7c3h"]
+[ext_resource type="Resource" uid="uid://70ms57quwy61" path="res://resources/events.tres" id="2_w8frs"]
+[ext_resource type="Script" uid="uid://d3tq31prp7pan" path="res://scripts/draw_pile.gd" id="3_w8frs"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_2r41h"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_mx8sn"]
+
+[node name="Level" type="Node2D" unique_id=1170616627]
+script = ExtResource("1_w7c3h")
+events = ExtResource("2_w8frs")
+
+[node name="BoardUI" type="CanvasLayer" parent="." unique_id=1004940318]
+
+[node name="Room" type="HBoxContainer" parent="BoardUI" unique_id=1377426378]
+offset_right = 40.0
+offset_bottom = 40.0
+
+[node name="Slot1" type="Sprite2D" parent="BoardUI/Room" unique_id=1371863231]
+
+[node name="Slot2" type="Sprite2D" parent="BoardUI/Room" unique_id=1285831574]
+
+[node name="Slot3" type="Sprite2D" parent="BoardUI/Room" unique_id=2052434262]
+
+[node name="Slot4" type="Sprite2D" parent="BoardUI/Room" unique_id=185772276]
+
+[node name="CurrentWeapon" type="Area2D" parent="BoardUI" unique_id=640729581]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="BoardUI/CurrentWeapon" unique_id=1318062360]
+shape = SubResource("RectangleShape2D_2r41h")
+
+[node name="Graphics" type="Sprite2D" parent="BoardUI/CurrentWeapon" unique_id=2105331242]
+
+[node name="DiscardPile" type="Area2D" parent="BoardUI" unique_id=553691093]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="BoardUI/DiscardPile" unique_id=13729433]
+shape = SubResource("RectangleShape2D_2r41h")
+
+[node name="Graphics" type="Sprite2D" parent="BoardUI/DiscardPile" unique_id=1149251765]
+
+[node name="DrawPile" type="Area2D" parent="BoardUI" unique_id=110527521]
+script = ExtResource("3_w8frs")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="BoardUI/DrawPile" unique_id=1235697421]
+shape = SubResource("RectangleShape2D_mx8sn")
+
+[node name="Graphics" type="Sprite2D" parent="BoardUI/DrawPile" unique_id=64808948]

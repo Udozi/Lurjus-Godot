@@ -1,0 +1,27 @@
+[gd_scene load_steps=5 format=3 uid="uid://baqqohdsduto6"]
+
+[ext_resource type="Script" uid="uid://cfs4uwpdjr1h5" path="res://scripts/cardmanager.gd" id="1_w8frs"]
+[ext_resource type="Script" uid="uid://bl566y5ugvfu0" path="res://scripts/card_state.gd" id="2_mx8sn"]
+[ext_resource type="PackedScene" uid="uid://cdd0f8k2dockg" path="res://scenes/events.tscn" id="3_ppgk2"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_2r41h"]
+
+[node name="Level" type="Node2D"]
+
+[node name="CardManager" type="Node2D" parent="."]
+script = ExtResource("1_w8frs")
+
+[node name="DiscardPile" type="Area2D" parent="."]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="DiscardPile"]
+shape = SubResource("RectangleShape2D_2r41h")
+
+[node name="CurrentWeapon" type="Area2D" parent="."]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="CurrentWeapon"]
+shape = SubResource("RectangleShape2D_2r41h")
+
+[node name="CardState" type="Node" parent="."]
+script = ExtResource("2_mx8sn")
+
+[node name="Events" parent="." instance=ExtResource("3_ppgk2")]

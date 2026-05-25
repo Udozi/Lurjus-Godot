@@ -1,0 +1,19 @@
+[gd_scene format=3 uid="uid://dvhb3hskrlpb6"]
+
+[ext_resource type="Script" uid="uid://clh301gl7c6t0" path="res://scripts/room.gd" id="1_88gup"]
+[ext_resource type="PackedScene" uid="uid://dmg7gnqeyfpnv" path="res://scenes/slot.tscn" id="2_ffxv4"]
+
+[node name="Room" type="Node2D" unique_id=230425454 node_paths=PackedStringArray("slot_1", "slot_2", "slot_3", "slot_4")]
+script = ExtResource("1_88gup")
+slot_1 = NodePath("Slot1")
+slot_2 = NodePath("Slot2")
+slot_3 = NodePath("Slot3")
+slot_4 = NodePath("Slot4")
+
+[node name="Slot1" parent="." unique_id=500646857 instance=ExtResource("2_ffxv4")]
+
+[node name="Slot2" parent="." unique_id=249312953 instance=ExtResource("2_ffxv4")]
+
+[node name="Slot3" parent="." unique_id=525288828 instance=ExtResource("2_ffxv4")]
+
+[node name="Slot4" parent="." unique_id=307779142 instance=ExtResource("2_ffxv4")]

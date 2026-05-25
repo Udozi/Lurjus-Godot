@@ -1,0 +1,15 @@
+[gd_scene format=3 uid="uid://c3ce4jc8i8ij4"]
+
+[ext_resource type="Script" uid="uid://d3tq31prp7pan" path="res://scripts/draw_pile.gd" id="1_le4h8"]
+[ext_resource type="PackedScene" uid="uid://bskp8xtr1rvol" path="res://scenes/card.tscn" id="2_uf7fb"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_mx8sn"]
+
+[node name="DrawPile" type="Area2D" unique_id=311112133]
+script = ExtResource("1_le4h8")
+card_tscn = ExtResource("2_uf7fb")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=321330473]
+shape = SubResource("RectangleShape2D_mx8sn")
+
+[node name="Graphics" type="Sprite2D" parent="." unique_id=628299845]

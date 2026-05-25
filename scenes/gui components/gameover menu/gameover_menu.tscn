@@ -1,0 +1,69 @@
+[gd_scene format=3 uid="uid://dhq3fs4a317y3"]
+
+[ext_resource type="Script" uid="uid://y6vxp3kk0u7g" path="res://scripts/gui components/gameover menu/gameover_menu.gd" id="1_2l40u"]
+
+[sub_resource type="LabelSettings" id="LabelSettings_nmvij"]
+font_size = 48
+
+[node name="Gameover Menu" type="Control" unique_id=1237317628 node_paths=PackedStringArray("label")]
+layout_mode = 3
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -20.0
+offset_top = -20.0
+offset_right = 20.0
+offset_bottom = 20.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_2l40u")
+label = NodePath("Panel/HBoxContainer/VBoxContainer/RoundResult")
+
+[node name="Panel" type="Panel" parent="." unique_id=686035770]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -101.25
+offset_top = -70.5
+offset_right = 101.25
+offset_bottom = 70.5
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="HBoxContainer" type="HBoxContainer" parent="Panel" unique_id=999969429]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="VBoxContainer" type="VBoxContainer" parent="Panel/HBoxContainer" unique_id=999531362]
+z_index = 999
+layout_mode = 2
+size_flags_horizontal = 3
+
+[node name="RoundResult" type="Label" parent="Panel/HBoxContainer/VBoxContainer" unique_id=1379077291]
+z_index = 999
+layout_mode = 2
+text = "You win!"
+label_settings = SubResource("LabelSettings_nmvij")
+horizontal_alignment = 1
+
+[node name="QuitButton" type="Button" parent="Panel/HBoxContainer/VBoxContainer" unique_id=1772573411]
+z_index = 999
+layout_mode = 2
+focus_neighbor_top = NodePath("../../Panel/HBoxContainer/VBoxContainer/OptionButton")
+text = "Exit game"
+
+[node name="NewGameButton" type="Button" parent="Panel/HBoxContainer/VBoxContainer" unique_id=2114024521]
+layout_mode = 2
+text = "New game"
+
+[connection signal="pressed" from="Panel/HBoxContainer/VBoxContainer/QuitButton" to="." method="_on_quit_button_pressed"]
+[connection signal="pressed" from="Panel/HBoxContainer/VBoxContainer/NewGameButton" to="." method="_on_new_game_button_pressed"]

@@ -1,0 +1,36 @@
+[gd_scene load_steps=5 format=3 uid="uid://baqqohdsduto6"]
+
+[ext_resource type="Script" uid="uid://eflr7wxemy78" path="res://scripts/level.gd" id="1_w7c3h"]
+[ext_resource type="Resource" uid="uid://70ms57quwy61" path="res://resources/events.tres" id="2_w8frs"]
+[ext_resource type="PackedScene" uid="uid://dm40migfgra3b" path="res://scenes/card_ui.tscn" id="3_w8frs"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_2r41h"]
+
+[node name="Level" type="Node2D"]
+script = ExtResource("1_w7c3h")
+events = ExtResource("2_w8frs")
+
+[node name="DiscardPile" type="Area2D" parent="."]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="DiscardPile"]
+shape = SubResource("RectangleShape2D_2r41h")
+
+[node name="CurrentWeapon" type="Area2D" parent="."]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="CurrentWeapon"]
+shape = SubResource("RectangleShape2D_2r41h")
+
+[node name="BoardUI" type="CanvasLayer" parent="."]
+
+[node name="Room" type="HBoxContainer" parent="BoardUI"]
+offset_right = 40.0
+offset_bottom = 40.0
+
+[node name="CardUI" parent="BoardUI/Room" instance=ExtResource("3_w8frs")]
+layout_mode = 2
+
+[node name="CardUI2" parent="BoardUI/Room" instance=ExtResource("3_w8frs")]
+layout_mode = 2
+
+[node name="CardUI3" parent="BoardUI/Room" instance=ExtResource("3_w8frs")]
+layout_mode = 2

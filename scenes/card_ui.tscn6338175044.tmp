@@ -1,0 +1,41 @@
+[gd_scene load_steps=8 format=3 uid="uid://dm40migfgra3b"]
+
+[ext_resource type="Script" uid="uid://b2l71e4v7w8n7" path="res://scripts/card_ui.gd" id="1_xou0u"]
+[ext_resource type="Script" uid="uid://bc1fpsktq023" path="res://scenes/card_state_machine.gd" id="2_2iqob"]
+[ext_resource type="Script" uid="uid://xu8sa5dhhl7q" path="res://scripts/states/card_in_draw_state.gd" id="3_8creq"]
+[ext_resource type="Script" uid="uid://duf1uacnvl7w7" path="res://scripts/states/card_in_room_state.gd" id="4_gf8qa"]
+[ext_resource type="Script" uid="uid://y3flc8ufiyti" path="res://scripts/states/card_moving_state.gd" id="5_cgy8f"]
+[ext_resource type="Script" uid="uid://buamd5yqv636o" path="res://scripts/states/card_in_weapon_state.gd" id="6_2dr6c"]
+[ext_resource type="Script" uid="uid://dxucf1tw6ka50" path="res://scripts/states/card_in_discard_state.gd" id="7_psiuq"]
+
+[node name="CardUI" type="Control"]
+layout_mode = 3
+anchors_preset = 0
+offset_right = 40.0
+offset_bottom = 40.0
+script = ExtResource("1_xou0u")
+
+[node name="CardStateMachine" type="Node" parent="." node_paths=PackedStringArray("initial_state")]
+script = ExtResource("2_2iqob")
+initial_state = NodePath("InDrawState")
+metadata/_custom_type_script = "uid://7vqpeq06jcwn"
+
+[node name="InDrawState" type="Node" parent="CardStateMachine"]
+script = ExtResource("3_8creq")
+state = null
+
+[node name="InRoomState" type="Node" parent="CardStateMachine"]
+script = ExtResource("4_gf8qa")
+state = 1
+
+[node name="MovingState" type="Node" parent="CardStateMachine"]
+script = ExtResource("5_cgy8f")
+state = 2
+
+[node name="InWeaponState" type="Node" parent="CardStateMachine"]
+script = ExtResource("6_2dr6c")
+state = 3
+
+[node name="InDiscardState" type="Node" parent="CardStateMachine"]
+script = ExtResource("7_psiuq")
+state = 4

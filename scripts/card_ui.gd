@@ -1,0 +1,22 @@
+class_name CardUI
+extends Control
+
+@export var sound: AudioStream
+
+@onready var card: Card = get_parent()
+@onready var card_state_machine: CardStateMachine = $CardStateMachine
+
+
+var tween: Tween
+var card_folder : String = "res://resources/art/cards/"
+
+
+func _ready() -> void:
+	card_state_machine.init(self)
+	update_graphics()	
+
+		
+func update_graphics():
+	
+	if card:
+		card.graphics.texture = load(card_folder + card.card_data.suit + str(card.card_data.index + 2) +".png")

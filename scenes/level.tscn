@@ -1,0 +1,71 @@
+[gd_scene format=3 uid="uid://baqqohdsduto6"]
+
+[ext_resource type="Script" uid="uid://eflr7wxemy78" path="res://scripts/level.gd" id="1_w7c3h"]
+[ext_resource type="Resource" uid="uid://70ms57quwy61" path="res://resources/events.tres" id="2_w8frs"]
+[ext_resource type="Script" uid="uid://boxdev5krr0s3" path="res://scripts/discard_pile.gd" id="3_2r41h"]
+[ext_resource type="Script" uid="uid://bwbkmawtghaox" path="res://scripts/gui components/uses_weapon.gd" id="3_8c41q"]
+[ext_resource type="PackedScene" uid="uid://dvhb3hskrlpb6" path="res://scenes/room.tscn" id="3_mx8sn"]
+[ext_resource type="Texture2D" uid="uid://lbrdsycyrsmq" path="res://resources/art/bg/game_board_scratch.png" id="3_w8frs"]
+[ext_resource type="PackedScene" uid="uid://bskp8xtr1rvol" path="res://scenes/card.tscn" id="4_klq6b"]
+[ext_resource type="LabelSettings" uid="uid://m7m108i46av0" path="res://resources/themes/bignumber.tres" id="6_b121j"]
+[ext_resource type="Script" uid="uid://ch4u22yd7i1vy" path="res://scripts/gui components/hp.gd" id="6_klq6b"]
+[ext_resource type="Script" uid="uid://brioukipswewb" path="res://scripts/gui components/draw_pile_size.gd" id="9_olg7q"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_2r41h"]
+
+[node name="Level" type="Node2D" unique_id=1170616627 node_paths=PackedStringArray("room")]
+script = ExtResource("1_w7c3h")
+events = ExtResource("2_w8frs")
+room = NodePath("BoardUI/Room")
+
+[node name="BoardUI" type="CanvasLayer" parent="." unique_id=1004940318]
+layer = 0
+
+[node name="CurrentWeapon" type="Area2D" parent="BoardUI" unique_id=640729581]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="BoardUI/CurrentWeapon" unique_id=1318062360]
+shape = SubResource("RectangleShape2D_2r41h")
+
+[node name="Graphics" type="Sprite2D" parent="BoardUI/CurrentWeapon" unique_id=2105331242]
+
+[node name="UseWeapon" type="Label" parent="BoardUI/CurrentWeapon" unique_id=1438299072]
+offset_left = 592.0
+offset_top = 566.0
+offset_right = 738.0
+offset_bottom = 589.0
+size_flags_horizontal = 4
+horizontal_alignment = 1
+vertical_alignment = 1
+script = ExtResource("3_8c41q")
+
+[node name="DiscardPile" type="Area2D" parent="BoardUI" unique_id=553691093]
+script = ExtResource("3_2r41h")
+card_tscn = ExtResource("4_klq6b")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="BoardUI/DiscardPile" unique_id=13729433]
+shape = SubResource("RectangleShape2D_2r41h")
+
+[node name="Graphics" type="Sprite2D" parent="BoardUI/DiscardPile" unique_id=1149251765]
+
+[node name="Room" parent="BoardUI" unique_id=230425454 instance=ExtResource("3_mx8sn")]
+
+[node name="HP" type="Label" parent="BoardUI" unique_id=2047990836]
+offset_right = 40.0
+offset_bottom = 23.0
+text = "20"
+label_settings = ExtResource("6_b121j")
+horizontal_alignment = 1
+vertical_alignment = 1
+script = ExtResource("6_klq6b")
+metadata/_edit_lock_ = true
+
+[node name="DrawPileSize" type="Label" parent="BoardUI" unique_id=1075870592]
+offset_right = 40.0
+offset_bottom = 23.0
+label_settings = ExtResource("6_b121j")
+script = ExtResource("9_olg7q")
+
+[node name="Background" type="Sprite2D" parent="." unique_id=1126971158]
+texture = ExtResource("3_w8frs")
+centered = false
+metadata/_edit_lock_ = true

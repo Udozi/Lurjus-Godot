@@ -1,18 +1,18 @@
 class_name Room
 extends Node2D
 
-@export var slot_1: Slot
-@export var slot_2: Slot
-@export var slot_3: Slot
-@export var slot_4: Slot
+@export var slot_w: Slot
+@export var slot_a: Slot
+@export var slot_s: Slot
+@export var slot_d: Slot
 
-@onready var room_slots: Array[Slot] = [slot_1, slot_2, slot_3, slot_4]
+@onready var room_slots: Array[Slot] = [slot_w, slot_a, slot_s, slot_d]
 
 @onready var slot_coordinates= {
-	slot_1 : CoordinatesList.ROOM_SLOT1_POS,
-	slot_2 : CoordinatesList.ROOM_SLOT2_POS,
-	slot_3 : CoordinatesList.ROOM_SLOT3_POS,
-	slot_4 : CoordinatesList.ROOM_SLOT4_POS
+	slot_w : CoordinatesList.ROOM_SLOTW_POS,
+	slot_a : CoordinatesList.ROOM_SLOTA_POS,
+	slot_s : CoordinatesList.ROOM_SLOTS_POS,
+	slot_d : CoordinatesList.ROOM_SLOTD_POS
 }
 
 
@@ -65,7 +65,7 @@ func _on_card_played(card: Card):
 			Player.can_escape = true
 		
 			if count_cards() == 0:
-				var draw_pile: DrawPile = get_parent().get_child(5) # TODO: fix this magic number
+				var draw_pile: DrawPile = get_parent().get_child(7) # TODO: fix this magic number
 				if draw_pile and len(draw_pile.cards) > 0:
 					advance(draw_pile)
 					
@@ -78,7 +78,7 @@ func _on_card_played(card: Card):
 func _on_try_escape():
 	print("Tryna escape here")
 	if Player.can_escape:
-		var draw_pile: DrawPile = get_parent().get_child(5) # TODO: fix this magic number
+		var draw_pile: DrawPile = get_parent().get_child(7) # TODO: fix this magic number
 		
 		if count_cards() < 2:
 			advance(draw_pile)
@@ -89,7 +89,7 @@ func _on_try_escape():
 
 func flee():
 	
-	var draw_pile: DrawPile = get_parent().get_child(5) # TODO: fix this magic number
+	var draw_pile: DrawPile = get_parent().get_child(7) # TODO: fix this magic number
 	var returning_cards: Array[Card]
 	
 	for slot in room_slots:

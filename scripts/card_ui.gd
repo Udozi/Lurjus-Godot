@@ -19,4 +19,8 @@ func _ready() -> void:
 func update_graphics():
 	
 	if card:
-		card.graphics.texture = load(card_folder + card.card_data.suit + str(card.card_data.index + 2) +".png")
+		if card.card_data.location == GameState.Location.DRAW_PILE:
+			card.graphics.texture = load(card_folder + "card_back.png")
+		
+		else:
+			card.graphics.texture = load(card_folder + card.card_data.suit + str(card.card_data.index + 2) +".png")

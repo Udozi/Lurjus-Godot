@@ -28,6 +28,7 @@ func update_position(new_position: Vector2):
 	position += rand_offset
 	
 	card_ui.position = position
+	card_ui.update_graphics()
 	z_index = GameState.z
 
 

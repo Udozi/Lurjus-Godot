@@ -38,15 +38,39 @@ func advance(draw_pile: DrawPile):
 		GameState.draw_pile_size = len(draw_pile.cards)
 
 
+func balance_next_room(draw_pile: DrawPile):
+	
+	# Escaping from a room full of enemies guarantees at least one weapon or potion in the next room, if any in deck
+	var reds_found: bool = false
+
+	for card in draw_pile.cards:
+		if !reds_found and (card.card_data.suit == "hearts" or card.card_data.suit == "diamonds"):
+			reds_found = true	
+			
+			draw_pile.cards.pop_at(draw_pile.cards.find(card))
+			draw_pile.cards.append(card)
+			
+			#print("Removed card: " + removed_card.card_data.suit + str(removed_card.card_data.value))
+			#print("Added card: " + card.card_data.suit + str(card.card_data.value))
+		
+
+
+
 func count_cards():
+	var cards_and_enemies_left : Array[int] = [] 
 	var cards_left: int = 0
+	var enemies_left: int = 0
 	
 	for slot in room_slots:
 		if slot.card:
 			cards_left += 1
-			
+			if slot.card.card_data.suit == "spades" or slot.card.card_data.suit == "clubs":
+				enemies_left += 1
+	
+	cards_and_enemies_left.append(cards_left)
+	cards_and_enemies_left.append(enemies_left)
 	#print("Cards left: ", cards_left)
-	return cards_left
+	return cards_and_enemies_left
 
 
 func _on_card_played(card: Card):
@@ -60,11 +84,13 @@ func _on_card_played(card: Card):
 	if slot:
 		
 		slot.card = null
+		var cards_and_enemies_left: Array[int] = count_cards()
+		var cards_left: int = cards_and_enemies_left[0]
 		
-		if count_cards() < 2:
+		if cards_left < 2:
 			Player.can_escape = true
 		
-			if count_cards() == 0:
+			if cards_left == 0:
 				var draw_pile: DrawPile = get_parent().get_child(7) # TODO: fix this magic number
 				if draw_pile and len(draw_pile.cards) > 0:
 					advance(draw_pile)
@@ -80,14 +106,18 @@ func _on_try_escape():
 	if Player.can_escape:
 		var draw_pile: DrawPile = get_parent().get_child(7) # TODO: fix this magic number
 		
-		if count_cards() < 2:
+		var cards_and_enemies_left: Array[int] = count_cards()
+		var cards_left: int = cards_and_enemies_left[0]
+		var enemies_left: int = cards_and_enemies_left[1]
+		
+		if count_cards()[0] < 2:
 			advance(draw_pile)
 			
 		else:
-			flee()
+			flee(enemies_left)
 
 
-func flee():
+func flee(enemy_count: int):
 	
 	var draw_pile: DrawPile = get_parent().get_child(7) # TODO: fix this magic number
 	var returning_cards: Array[Card]
@@ -111,6 +141,9 @@ func flee():
 	# To fix top card collision after fleeing
 	for card in draw_pile.cards:
 		card.z_index = draw_pile.cards.find(card)
+		
+	if enemy_count == len(room_slots):
+		balance_next_room(draw_pile)
 		
 	Player.can_escape = false
 	advance(draw_pile)

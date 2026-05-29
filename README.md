@@ -74,7 +74,9 @@ Add its number to your health, and than discard it. Your health may not exceed 2
 
 If you chose a Monster...
 You may either fight it barehanded or with an equipped Weapon.
+
 Once you have chosen 3 cards (such that only one remains), your turn is complete. Leave the fourth card face up in front of you as part of the next Room.
+*You can also choose to clear the whole room before advancing in Lurjus.*
 
 
 Combat:

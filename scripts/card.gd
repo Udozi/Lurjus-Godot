@@ -7,6 +7,8 @@ extends Area2D
 var card_ui_tscn: PackedScene = preload("uid://dm40migfgra3b")
 var target_position = CoordinatesList.DRAW_PILE_POS
 var card_ui: CardUI = card_ui_tscn.instantiate()
+var skip_animation: bool = true
+var animation_going: bool = false
 
 signal card_played
 signal try_escape
@@ -19,13 +21,26 @@ func _ready() -> void:
 func update_position(new_position: Vector2):
 	
 	var offsets: Array[float] = [Player.drunkeness * 3, Player.drunkeness * 3, Player.drunkeness / 10]
-	position = new_position
 	rotation = randf_range(-offsets[2], offsets[2])
 	
 	var rand_offx = randf_range(-offsets[0], offsets[0])
 	var rand_offy = randf_range(-offsets[1], offsets[1])
 	var rand_offset = Vector2(rand_offx, rand_offy)
-	position += rand_offset
+	var corrected_new_pos = new_position + rand_offset
+	
+	if skip_animation:
+		position = corrected_new_pos
+		
+	else:
+		disable()
+		animation_going = true	
+		var animation_length = 1.0 / Settings.animation_speed	
+		var tween: Tween = create_tween()
+		tween.tween_property(self, "position", corrected_new_pos, animation_length)
+		animation_going = false
+		enable()
+		
+
 	
 	card_ui.position = position
 	card_ui.update_graphics()
@@ -82,9 +97,11 @@ func _on_card_activated():
 		
 
 func enable():
-	card_ui.card_state_machine.current_state = card_ui.card_state_machine.find_child("PassiveState")
+	if card_ui.card_state_machine:
+		card_ui.card_state_machine.current_state = card_ui.card_state_machine.find_child("PassiveState")
 	
 	
 func disable():
-	card_ui.card_state_machine.current_state = card_ui.card_state_machine.find_child("SleepingState")
+	if card_ui.card_state_machine:
+		card_ui.card_state_machine.current_state = card_ui.card_state_machine.find_child("SleepingState")
 	

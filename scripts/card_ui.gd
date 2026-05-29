@@ -6,12 +6,12 @@ extends Control
 @onready var card: Card = get_parent()
 @onready var card_state_machine: CardStateMachine = $CardStateMachine
 
-
 var tween: Tween
 var card_folder : String = "res://resources/art/cards/"
 
 
 func _ready() -> void:
+		
 	card_state_machine.init(self)
 	update_graphics()	
 

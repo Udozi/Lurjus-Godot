@@ -17,13 +17,19 @@ extends Node2D
 
 
 func advance(draw_pile: DrawPile):
-	if draw_pile:		
+	# Draw cards from the draw pile into the room
+	
+	if draw_pile and !GameState.game_is_over:		
 		for slot in room_slots:
 			if !slot.card and len(draw_pile.cards) > 0:
 				slot.card = draw_pile.cards.pop_back()
 				slot.card.card_data.send_to(GameState.Location.ROOM)
+				slot.card.skip_animation = false
 				slot.card.update_position(slot_coordinates[slot])
 				slot.card.enable()
+				
+				var wait_time: float = 1.0 / (Settings.animation_speed * 2)
+				await get_tree().create_timer(wait_time).timeout
 			
 				if slot.card and not slot.card.card_played.is_connected(_on_card_played):
 					slot.card.card_played.connect(_on_card_played)
@@ -49,11 +55,6 @@ func balance_next_room(draw_pile: DrawPile):
 			
 			draw_pile.cards.pop_at(draw_pile.cards.find(card))
 			draw_pile.cards.append(card)
-			
-			#print("Removed card: " + removed_card.card_data.suit + str(removed_card.card_data.value))
-			#print("Added card: " + card.card_data.suit + str(card.card_data.value))
-		
-
 
 
 func count_cards():
@@ -107,7 +108,7 @@ func _on_try_escape():
 		var draw_pile: DrawPile = get_parent().get_child(7) # TODO: fix this magic number
 		
 		var cards_and_enemies_left: Array[int] = count_cards()
-		var cards_left: int = cards_and_enemies_left[0]
+		var _cards_left: int = cards_and_enemies_left[0]
 		var enemies_left: int = cards_and_enemies_left[1]
 		
 		if count_cards()[0] < 2:
@@ -124,14 +125,19 @@ func flee(enemy_count: int):
 	
 	for slot in room_slots:
 		
+		
 		var card = slot.card
-		card.disable()
-		returning_cards.append(card)
-		card.card_data.send_to(GameState.Location.DRAW_PILE)
-		card.update_position(card.card_data.check_new_coordinates())
-
-		card.z_index = 0
+		if card:
+			card.disable()
+			returning_cards.append(card)
+			card.card_data.send_to(GameState.Location.DRAW_PILE)
+			card.update_position(card.card_data.check_new_coordinates())
+			card.z_index = 0
+			
 		slot.card = null
+		
+		var wait_time: float = 1.0 / (Settings.animation_speed * 2)
+		await get_tree().create_timer(wait_time).timeout
 		
 	returning_cards.shuffle()
 	

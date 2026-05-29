@@ -3,8 +3,6 @@ extends Node2D
 @export var events: Events
 @export var room: Room
 
-signal try_escape
-
 
 func _ready():
 	

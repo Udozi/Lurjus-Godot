@@ -16,7 +16,7 @@ compatibility/default_parent_skeleton_in_mesh_instance_3d=true
 
 config/name="Lurjus"
 run/main_scene="res://scenes/level.tscn"
-config/features=PackedStringArray("4.6", "GL Compatibility")
+config/features=PackedStringArray("4.4", "GL Compatibility")
 config/icon="res://icon.svg"
 
 [autoload]
@@ -26,6 +26,7 @@ GameState="*res://scripts/states/game_state.gd"
 CoordinatesList="*res://scripts/coordinates.gd"
 PlayingDeck="*uid://d4hdut6dq1by5"
 Player="*uid://b11cljuftopy6"
+Settings="*uid://di1vlig02oma"
 
 [display]
 

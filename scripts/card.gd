@@ -3,12 +3,12 @@ extends Area2D
 
 @export var card_data: CardData
 @export var graphics: Sprite2D
+@export var value_label: Label
 
 var card_ui_tscn: PackedScene = preload("uid://dm40migfgra3b")
 var target_position = CoordinatesList.DRAW_PILE_POS
 var card_ui: CardUI = card_ui_tscn.instantiate()
-var skip_animation: bool = true
-var animation_going: bool = false
+
 
 signal card_played
 signal try_escape
@@ -28,20 +28,18 @@ func update_position(new_position: Vector2):
 	var rand_offset = Vector2(rand_offx, rand_offy)
 	var corrected_new_pos = new_position + rand_offset
 	
-	if skip_animation:
+	if card_data.skip_animation:
 		position = corrected_new_pos
 		
 	else:
 		disable()
-		animation_going = true	
+		card_data.animation_going = true	
 		var animation_length = 1.0 / Settings.animation_speed	
 		var tween: Tween = create_tween()
 		tween.tween_property(self, "position", corrected_new_pos, animation_length)
-		animation_going = false
+		card_data.animation_going = false
 		enable()
-		
-
-	
+			
 	card_ui.position = position
 	card_ui.update_graphics()
 	z_index = GameState.z
@@ -53,17 +51,19 @@ func discard():
 
 
 func play():
+		
+	if !is_menu_card():
+		print("Played ", card_data.suit, card_data.value)
+		var effect = card_data.resolve_effects()
+		
+		match effect:
+			"weapon equipped":
+				Player.equip_new_weapon(self)
+							
+			"weapon used":
+				Player.weapon.cards.append(self)
 	
-	print("Played ", card_data.suit, card_data.value)
-	var effect = card_data.resolve_effects()
-	
-	match effect:
-		"weapon equipped":
-			Player.equip_new_weapon(self)
-						
-		"weapon used":
-			Player.weapon.cards.append(self)
-	
+	# These also happen to menu cards
 	card_played.emit(self)
 	card_ui.update_graphics()
 
@@ -105,3 +105,6 @@ func disable():
 	if card_ui.card_state_machine:
 		card_ui.card_state_machine.current_state = card_ui.card_state_machine.find_child("SleepingState")
 	
+
+func is_menu_card():
+	return card_data.menu_function != ""

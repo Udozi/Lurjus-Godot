@@ -51,6 +51,10 @@ size_flags_vertical = 0
 layout_mode = 2
 text = "Resume game"
 
+[node name="MenuButton" type="Button" parent="Panel/HBoxContainer/VBoxContainer" unique_id=246082276]
+layout_mode = 2
+text = "Return to menu"
+
 [node name="QuitButton" type="Button" parent="Panel/HBoxContainer/VBoxContainer" unique_id=532979392]
 z_index = 999
 layout_mode = 2
@@ -59,4 +63,5 @@ text = "Exit game"
 
 [connection signal="item_selected" from="Panel/HBoxContainer/VBoxContainer/OptionButton" to="." method="_on_option_button_item_selected"]
 [connection signal="pressed" from="Panel/HBoxContainer/VBoxContainer/ResumeButton" to="." method="_on_resume_button_pressed"]
+[connection signal="pressed" from="Panel/HBoxContainer/VBoxContainer/MenuButton" to="." method="_on_menu_button_pressed"]
 [connection signal="pressed" from="Panel/HBoxContainer/VBoxContainer/QuitButton" to="." method="_on_quit_button_pressed"]

@@ -13,19 +13,36 @@ func clean(dirty_deck: Array[Card]) -> Array[Card]:
 	return clean_deck
 		
 
-func create_deck(suits):
+func create_deck(suits, menu_content = null):
+	
+	var button_order : int = 0
 	
 	for suit in suits:
-		var count : int = suits[suit]
-		for i in count:
+		
+		if menu_content:
+			
 			var new_card: Card = card_tscn.instantiate()
 			new_card.card_data.suit = suit
-			new_card.card_data.index = i
-			var value: int = i + 2
-			new_card.card_data.value = value
 			
-			cards.append(new_card)
-					
+			if button_order < len(menu_content):
+				new_card.card_data.menu_function = menu_content[button_order]
+			
+			cards.append(new_card)				
 			new_card.update_position(CoordinatesList.DRAW_PILE_POS)
-	
-	cards = clean(cards)
+			
+			button_order += 1
+		
+		else:
+			var count : int = suits[suit]
+			for i in count:
+				var new_card: Card = card_tscn.instantiate()
+				
+				new_card.card_data.suit = suit
+				new_card.card_data.index = i
+				var value: int = i + 2
+				new_card.card_data.value = value
+				
+				cards.append(new_card)				
+				new_card.update_position(CoordinatesList.DRAW_PILE_POS)
+
+		cards = clean(cards)

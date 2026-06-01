@@ -29,5 +29,6 @@ func _on_resume_button_pressed() -> void:
 	visible = false
 
 
-func _on_new_game_button_pressed() -> void:
-	pass
+func _on_menu_button_pressed() -> void:
+	get_tree().change_scene_to_file("res://scenes/gui components/main menu/menu.tscn")
+	visible = false

@@ -5,8 +5,4 @@
 [resource]
 resource_local_to_scene = true
 script = ExtResource("1_q1lyp")
-suit = null
-index = null
-location = null
-powerups = null
 metadata/_custom_type_script = "uid://blgo34yg7ktqh"

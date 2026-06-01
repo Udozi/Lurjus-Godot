@@ -24,7 +24,7 @@ func advance(draw_pile: DrawPile):
 			if !slot.card and len(draw_pile.cards) > 0:
 				slot.card = draw_pile.cards.pop_back()
 				slot.card.card_data.send_to(GameState.Location.ROOM)
-				slot.card.skip_animation = false
+				slot.card.card_data.skip_animation = false
 				slot.card.update_position(slot_coordinates[slot])
 				slot.card.enable()
 				
@@ -76,7 +76,10 @@ func count_cards():
 
 func _on_card_played(card: Card):
 	
-	var slot = Slot
+	if card.is_menu_card():
+		flee(0, card.card_data.menu_function)
+				
+	var slot: Slot
 	
 	for roomslot in room_slots:
 		if roomslot.has_the_card(card):
@@ -92,7 +95,7 @@ func _on_card_played(card: Card):
 			Player.can_escape = true
 		
 			if cards_left == 0:
-				var draw_pile: DrawPile = get_parent().get_child(7) # TODO: fix this magic number
+				var draw_pile: DrawPile = $"../DrawPile"
 				if draw_pile and len(draw_pile.cards) > 0:
 					advance(draw_pile)
 					
@@ -105,7 +108,7 @@ func _on_card_played(card: Card):
 func _on_try_escape():
 	print("Tryna escape here")
 	if Player.can_escape:
-		var draw_pile: DrawPile = get_parent().get_child(7) # TODO: fix this magic number
+		var draw_pile: DrawPile = $"../DrawPile"
 		
 		var cards_and_enemies_left: Array[int] = count_cards()
 		var _cards_left: int = cards_and_enemies_left[0]
@@ -114,17 +117,19 @@ func _on_try_escape():
 		if count_cards()[0] < 2:
 			advance(draw_pile)
 			
+		elif room_slots[0].card.is_menu_card():
+			flee(0,"cancel")
+			
 		else:
 			flee(enemies_left)
 
 
-func flee(enemy_count: int):
+func flee(enemy_count: int, menu_function = ""):
 	
-	var draw_pile: DrawPile = get_parent().get_child(7) # TODO: fix this magic number
+	var draw_pile: DrawPile = $"../DrawPile"
 	var returning_cards: Array[Card]
 	
 	for slot in room_slots:
-		
 		
 		var card = slot.card
 		if card:
@@ -137,7 +142,12 @@ func flee(enemy_count: int):
 		slot.card = null
 		
 		var wait_time: float = 1.0 / (Settings.animation_speed * 2)
-		await get_tree().create_timer(wait_time).timeout
+		if get_tree():
+			await get_tree().create_timer(wait_time).timeout
+		
+	if menu_function:
+		resolve_menu_command(menu_function)
+		return
 		
 	returning_cards.shuffle()
 	
@@ -153,3 +163,18 @@ func flee(enemy_count: int):
 		
 	Player.can_escape = false
 	advance(draw_pile)
+
+
+func resolve_menu_command(menu_function):
+	print(menu_function)
+	match menu_function:
+		"quickgame":
+			get_tree().change_scene_to_file("res://scenes/level.tscn")
+			return
+		"cancel","A","B","C","D":
+			Coordination.target_menu = Coordination.menus["main"]
+			get_tree().change_scene_to_file("res://scenes/gui components/main menu/menu.tscn")
+			return
+	
+	Coordination.target_menu = Coordination.menus[menu_function]
+	get_tree().change_scene_to_file("res://scenes/gui components/main menu/menu.tscn")

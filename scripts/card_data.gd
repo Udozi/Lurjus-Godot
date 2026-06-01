@@ -6,6 +6,9 @@ const SUITS = ["clubs","spades","hearts","diamonds"]
 @export_group("Card Attributes")
 @export var suit : String = SUITS[0]
 @export var index : int = 0
+@export var skip_animation: bool = true
+@export var animation_going: bool = false
+@export var menu_function: String = ""
 
 @export_group("Card Powerups")
 @export var powerups: Array[String] = []

@@ -1,0 +1,31 @@
+[gd_scene format=3 uid="uid://cgkrixm6qp1i8"]
+
+[ext_resource type="Script" uid="uid://7vqpeq06jcwn" path="res://scripts/states/card_states/card_state_machine.gd" id="1_oxrk4"]
+[ext_resource type="Script" uid="uid://dxucf1tw6ka50" path="res://scripts/states/card_states/card_passive_state.gd" id="2_eikpn"]
+[ext_resource type="Script" uid="uid://xu8sa5dhhl7q" path="res://scripts/states/card_states/card_mouseover_state.gd" id="3_8ffk8"]
+[ext_resource type="Script" uid="uid://duf1uacnvl7w7" path="res://scripts/states/card_states/card_pressed_state.gd" id="4_2yhxb"]
+[ext_resource type="Script" uid="uid://y3flc8ufiyti" path="res://scripts/states/card_states/card_animated_state.gd" id="5_i4hde"]
+
+[node name="CardStateMachine" type="Node" unique_id=583251812 node_paths=PackedStringArray("initial_state")]
+script = ExtResource("1_oxrk4")
+initial_state = NodePath("SleepingState")
+metadata/_custom_type_script = "uid://7vqpeq06jcwn"
+
+[node name="PassiveState" type="Node" parent="." unique_id=724741858]
+script = ExtResource("2_eikpn")
+
+[node name="MouseoverState" type="Node" parent="." unique_id=232038455]
+script = ExtResource("3_8ffk8")
+state = 1
+
+[node name="PressedState" type="Node" parent="." unique_id=1624243281]
+script = ExtResource("4_2yhxb")
+state = 2
+
+[node name="AnimatedState" type="Node" parent="." unique_id=2068050881]
+script = ExtResource("5_i4hde")
+state = 3
+
+[node name="SleepingState" type="Node" parent="." unique_id=1855655522]
+script = ExtResource("5_i4hde")
+state = 3

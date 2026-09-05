@@ -3,85 +3,116 @@
 [ext_resource type="Script" uid="uid://eflr7wxemy78" path="res://scripts/level.gd" id="1_w7c3h"]
 [ext_resource type="Resource" uid="uid://70ms57quwy61" path="res://resources/events.tres" id="2_w8frs"]
 [ext_resource type="Script" uid="uid://boxdev5krr0s3" path="res://scripts/discard_pile.gd" id="3_2r41h"]
-[ext_resource type="Script" uid="uid://bwbkmawtghaox" path="res://scripts/gui components/uses_weapon.gd" id="3_8c41q"]
 [ext_resource type="PackedScene" uid="uid://dvhb3hskrlpb6" path="res://scenes/room.tscn" id="3_mx8sn"]
-[ext_resource type="PackedScene" uid="uid://bskp8xtr1rvol" path="res://scenes/card.tscn" id="4_klq6b"]
-[ext_resource type="LabelSettings" uid="uid://m7m108i46av0" path="res://resources/themes/bignumber.tres" id="6_b121j"]
-[ext_resource type="Script" uid="uid://ch4u22yd7i1vy" path="res://scripts/gui components/hp.gd" id="6_klq6b"]
-[ext_resource type="Script" uid="uid://brioukipswewb" path="res://scripts/gui components/draw_pile_size.gd" id="9_olg7q"]
-[ext_resource type="Script" uid="uid://dv7eff6etwsj6" path="res://scripts/gui components/can_heal.gd" id="10_8iemx"]
-[ext_resource type="Texture2D" uid="uid://d3vyvd5idebar" path="res://resources/art/bg/game_bg.png" id="10_olg7q"]
-[ext_resource type="Script" uid="uid://ck45um0h0k5es" path="res://scripts/gui components/can_escape.gd" id="11_64w2a"]
+[ext_resource type="PackedScene" uid="uid://cjw70pdwm7vo0" path="res://scenes/gui components/health_meter.tscn" id="5_wc255"]
+[ext_resource type="Theme" uid="uid://b0btqntjftj45" path="res://resources/themes/button_text.tres" id="9_fpun6"]
+[ext_resource type="Script" uid="uid://dv7eff6etwsj6" path="res://scripts/gui components/player_info.gd" id="10_8iemx"]
+[ext_resource type="Script" uid="uid://bawnxhmdckt7s" path="res://scripts/bubble.gd" id="11_64w2a"]
+[ext_resource type="Texture2D" uid="uid://ci3hhpxsjyae5" path="res://resources/art/gameui/bubble.png" id="12_fpun6"]
+[ext_resource type="PackedScene" uid="uid://b88rjdau0wkgs" path="res://scenes/player_character.tscn" id="12_wc255"]
+[ext_resource type="Texture2D" uid="uid://jne7u7aqi3t8" path="res://resources/art/bg/Adventure-foreground.png" id="13_arp2o"]
+[ext_resource type="PackedScene" uid="uid://bcem266cgkirj" path="res://scenes/dialogue_handler.tscn" id="13_fpun6"]
+[ext_resource type="Texture2D" uid="uid://cdud73ggcbln6" path="res://resources/art/buttons/pausemenu_button.png" id="14_fpun6"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_2r41h"]
 
-[node name="Level" type="Node2D" unique_id=1170616627 node_paths=PackedStringArray("room")]
+[sub_resource type="LabelSettings" id="LabelSettings_wc255"]
+
+[sub_resource type="SystemFont" id="SystemFont_b121j"]
+font_names = PackedStringArray("Dirt Road")
+
+[sub_resource type="FontVariation" id="FontVariation_8c41q"]
+base_font = SubResource("SystemFont_b121j")
+
+[sub_resource type="LabelSettings" id="LabelSettings_64w2a"]
+font = SubResource("FontVariation_8c41q")
+font_size = 100
+font_color = Color(0.741176, 0.717647, 0.752941, 1)
+
+[node name="Level" type="Node2D" unique_id=1580520433 node_paths=PackedStringArray("room")]
 script = ExtResource("1_w7c3h")
 events = ExtResource("2_w8frs")
 room = NodePath("BoardUI/Room")
 
-[node name="BoardUI" type="CanvasLayer" parent="." unique_id=1004940318]
+[node name="BoardUI" type="CanvasLayer" parent="." unique_id=446283205]
 layer = 0
 
-[node name="CurrentWeapon" type="Area2D" parent="BoardUI" unique_id=640729581]
-
-[node name="CollisionShape2D" type="CollisionShape2D" parent="BoardUI/CurrentWeapon" unique_id=1318062360]
-shape = SubResource("RectangleShape2D_2r41h")
-
-[node name="Graphics" type="Sprite2D" parent="BoardUI/CurrentWeapon" unique_id=2105331242]
-
-[node name="UseWeapon" type="Label" parent="BoardUI/CurrentWeapon" unique_id=1438299072]
-offset_left = 400.0
-offset_top = 225.0
-offset_right = 546.0
-offset_bottom = 248.0
-size_flags_horizontal = 4
-horizontal_alignment = 1
-vertical_alignment = 1
-script = ExtResource("3_8c41q")
-
-[node name="DiscardPile" type="Area2D" parent="BoardUI" unique_id=553691093]
+[node name="DiscardPile" type="Area2D" parent="BoardUI" unique_id=396136527]
 script = ExtResource("3_2r41h")
-card_tscn = ExtResource("4_klq6b")
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="BoardUI/DiscardPile" unique_id=13729433]
+[node name="CollisionShape2D" type="CollisionShape2D" parent="BoardUI/DiscardPile" unique_id=1976021845]
 shape = SubResource("RectangleShape2D_2r41h")
 
-[node name="Graphics" type="Sprite2D" parent="BoardUI/DiscardPile" unique_id=1149251765]
+[node name="Graphics" type="Sprite2D" parent="BoardUI/DiscardPile" unique_id=785906990]
 
-[node name="Room" parent="BoardUI" unique_id=230425454 instance=ExtResource("3_mx8sn")]
+[node name="Room" parent="BoardUI" unique_id=1874135079 node_paths=PackedStringArray("bubble") instance=ExtResource("3_mx8sn")]
+bubble = NodePath("../Bubble")
 
-[node name="HP" type="Label" parent="BoardUI" unique_id=2047990836]
-offset_right = 40.0
-offset_bottom = 23.0
-text = "20"
-label_settings = ExtResource("6_b121j")
-horizontal_alignment = 1
-vertical_alignment = 1
-script = ExtResource("6_klq6b")
-metadata/_edit_lock_ = true
+[node name="HealthMeter" parent="BoardUI" unique_id=1588292850 instance=ExtResource("5_wc255")]
 
-[node name="DrawPileSize" type="Label" parent="BoardUI" unique_id=1075870592]
-offset_right = 40.0
-offset_bottom = 23.0
-label_settings = ExtResource("6_b121j")
-script = ExtResource("9_olg7q")
-
-[node name="CanHeal" type="Label" parent="BoardUI" unique_id=674234966]
-offset_left = 400.0
-offset_top = 200.0
-offset_right = 440.0
-offset_bottom = 223.0
+[node name="PlayerInfo" type="Label" parent="BoardUI" unique_id=1297249831]
+offset_left = 450.0
+offset_top = 913.0
+offset_right = 490.0
+offset_bottom = 936.0
 script = ExtResource("10_8iemx")
 
-[node name="CanEscape" type="Label" parent="BoardUI" unique_id=2083197085]
-offset_left = 400.0
-offset_top = 175.0
-offset_right = 440.0
-offset_bottom = 198.0
-script = ExtResource("11_64w2a")
+[node name="Dialogue" type="Label" parent="BoardUI" unique_id=632743027]
+custom_minimum_size = Vector2(290, 200)
+custom_maximum_size = Vector2(1160, 400)
+offset_left = 647.0
+offset_top = 909.0
+offset_right = 1471.0
+offset_bottom = 1041.0
+theme_type_variation = &"HeaderSmall"
+autowrap_mode = 2
 
-[node name="Background" type="Sprite2D" parent="." unique_id=1126971158]
-texture = ExtResource("10_olg7q")
+[node name="LevelInfo" type="Label" parent="BoardUI" unique_id=1285849505]
+offset_left = 1375.0
+offset_top = 122.0
+offset_right = 1878.0
+offset_bottom = 157.0
+theme = ExtResource("9_fpun6")
+label_settings = SubResource("LabelSettings_wc255")
+
+[node name="Bubble" type="Sprite2D" parent="BoardUI" unique_id=1997880254 node_paths=PackedStringArray("thought")]
+visible = false
+position = Vector2(-42.031822, -103.85951)
+scale = Vector2(1.1662331, 1.1662331)
+texture = ExtResource("12_fpun6")
+offset = Vector2(400, 200)
+script = ExtResource("11_64w2a")
+thought = NodePath("Thought")
+
+[node name="Thought" type="Label" parent="BoardUI/Bubble" unique_id=80781979]
+offset_left = 346.44177
+offset_top = 132.78609
+offset_right = 451.44177
+offset_bottom = 280.78607
+label_settings = SubResource("LabelSettings_64w2a")
+horizontal_alignment = 1
+
+[node name="PlayerCharacter" parent="BoardUI" unique_id=2024827038 instance=ExtResource("12_wc255")]
+z_index = -50
+
+[node name="Foreground" type="Sprite2D" parent="BoardUI" unique_id=862282592]
+z_index = 200
+texture = ExtResource("13_arp2o")
+centered = false
+
+[node name="SettingsMenuButton" type="Button" parent="BoardUI" unique_id=1899070237]
+z_index = 500
+offset_left = 1825.0
+offset_top = 11.0
+offset_right = 1905.0
+offset_bottom = 91.0
+icon = ExtResource("14_fpun6")
+icon_alignment = 1
+
+[node name="Background" type="Sprite2D" parent="." unique_id=232223656]
 centered = false
 metadata/_edit_lock_ = true
+
+[node name="DialogueHandler" parent="." unique_id=1033759200 instance=ExtResource("13_fpun6")]
+
+[connection signal="pressed" from="BoardUI/SettingsMenuButton" to="." method="_on_settings_menu_button_pressed"]

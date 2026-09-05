@@ -1,0 +1,7 @@
+[gd_resource type="Theme" format=3 uid="uid://b0btqntjftj45"]
+
+[sub_resource type="FontVariation" id="FontVariation_elvx7"]
+
+[resource]
+default_font = SubResource("FontVariation_elvx7")
+default_font_size = 24

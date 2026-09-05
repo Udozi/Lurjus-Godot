@@ -1,0 +1,40 @@
+[gd_scene format=3 uid="uid://b4ovxfa4gelj3"]
+
+[ext_resource type="Script" uid="uid://doa8tcx0iiiug" path="res://scripts/gui components/menu/menu.gd" id="1_a7j1s"]
+[ext_resource type="Resource" uid="uid://70ms57quwy61" path="res://resources/events.tres" id="2_aj3wx"]
+[ext_resource type="PackedScene" uid="uid://b88rjdau0wkgs" path="res://scenes/player_character.tscn" id="3_aj3wx"]
+[ext_resource type="Texture2D" uid="uid://cdud73ggcbln6" path="res://resources/art/buttons/pausemenu_button.png" id="4_a7j1s"]
+[ext_resource type="Texture2D" uid="uid://4sh7va7lc5pe" path="res://resources/art/bg/mainmenu.png" id="4_aj3wx"]
+
+[node name="Menu" type="Node2D" unique_id=364543051]
+script = ExtResource("1_a7j1s")
+events = ExtResource("2_aj3wx")
+
+[node name="MenuUI" type="CanvasLayer" parent="." unique_id=204108475]
+layer = 0
+
+[node name="PlayerCharacter" parent="MenuUI" unique_id=2024827038 instance=ExtResource("3_aj3wx")]
+
+[node name="Label" type="Label" parent="MenuUI" unique_id=1904457852]
+offset_left = 1600.0
+offset_top = 30.0
+offset_right = 1794.0
+offset_bottom = 131.0
+text = "Quick start:
+F2 - Quick game
+F3 - Tutorial
+F4 - Adventure"
+
+[node name="BG" type="Sprite2D" parent="." unique_id=1510758392]
+texture = ExtResource("4_aj3wx")
+centered = false
+
+[node name="SettingsMenuButton" type="Button" parent="." unique_id=2030147833]
+offset_left = 1825.0
+offset_top = 11.0
+offset_right = 1905.0
+offset_bottom = 91.0
+icon = ExtResource("4_a7j1s")
+icon_alignment = 1
+
+[connection signal="pressed" from="SettingsMenuButton" to="." method="_on_settings_menu_button_pressed"]

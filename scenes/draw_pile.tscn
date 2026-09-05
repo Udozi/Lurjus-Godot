@@ -1,15 +1,21 @@
 [gd_scene format=3 uid="uid://c3ce4jc8i8ij4"]
 
 [ext_resource type="Script" uid="uid://d3tq31prp7pan" path="res://scripts/draw_pile.gd" id="1_le4h8"]
-[ext_resource type="PackedScene" uid="uid://bskp8xtr1rvol" path="res://scenes/card.tscn" id="2_uf7fb"]
+[ext_resource type="LabelSettings" uid="uid://m7m108i46av0" path="res://resources/themes/bignumber.tres" id="2_brcev"]
+[ext_resource type="Script" uid="uid://brioukipswewb" path="res://scripts/gui components/draw_pile_size.gd" id="3_yf11w"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_mx8sn"]
 
-[node name="DrawPile" type="Area2D" unique_id=311112133]
+[node name="DrawPile" type="Area2D" unique_id=100115782]
 script = ExtResource("1_le4h8")
-card_tscn = ExtResource("2_uf7fb")
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=321330473]
+[node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=1415513883]
 shape = SubResource("RectangleShape2D_mx8sn")
 
-[node name="Graphics" type="Sprite2D" parent="." unique_id=628299845]
+[node name="Graphics" type="Sprite2D" parent="." unique_id=191962455]
+
+[node name="DrawPileSize" type="Label" parent="." unique_id=834140768]
+offset_right = 40.0
+offset_bottom = 23.0
+label_settings = ExtResource("2_brcev")
+script = ExtResource("3_yf11w")

@@ -3,36 +3,41 @@
 [ext_resource type="Script" uid="uid://c2qfbr0sjrk5c" path="res://scripts/card.gd" id="1_6u4wf"]
 [ext_resource type="Resource" uid="uid://buk0g6oay5ebl" path="res://resources/card_data.tres" id="2_ktuci"]
 [ext_resource type="Texture2D" uid="uid://dyr80iewxbld0" path="res://resources/art/cards/clubs1.png" id="3_ktuci"]
-[ext_resource type="LabelSettings" uid="uid://cofj8k2y33x2" path="res://resources/themes/card_text.tres" id="4_kg30u"]
+[ext_resource type="LabelSettings" uid="uid://b6jeo0ons6j53" path="res://resources/themes/card_value_red.tres" id="4_kg30u"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_qyp4i"]
 size = Vector2(136, 190)
 
-[sub_resource type="SystemFont" id="SystemFont_sy11y"]
-
-[sub_resource type="Theme" id="Theme_6ligt"]
-default_font = SubResource("SystemFont_sy11y")
+[sub_resource type="Theme" id="Theme_sy11y"]
 default_font_size = 20
 
-[node name="Card" type="Area2D" unique_id=668226955 node_paths=PackedStringArray("graphics", "value_label")]
+[node name="Card" type="Area2D" unique_id=990133832 node_paths=PackedStringArray("graphics", "value_label")]
 scale = Vector2(1.75, 1.75)
 script = ExtResource("1_6u4wf")
 card_data = ExtResource("2_ktuci")
 graphics = NodePath("Graphics")
 value_label = NodePath("ValueLabel")
 
-[node name="Graphics" type="Sprite2D" parent="." unique_id=324867633]
+[node name="Graphics" type="Sprite2D" parent="." unique_id=879854219]
 texture = ExtResource("3_ktuci")
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=198734166]
+[node name="Powerup1" type="Sprite2D" parent="." unique_id=520039744]
+position = Vector2(-40, 20)
+scale = Vector2(0.99999994, 0.99999994)
+
+[node name="Powerup2" type="Sprite2D" parent="." unique_id=1573896459]
+position = Vector2(-40, 60)
+scale = Vector2(0.99999994, 0.99999994)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=240301321]
 shape = SubResource("RectangleShape2D_qyp4i")
 
-[node name="ValueLabel" type="Label" parent="." unique_id=1889523923]
-offset_left = -58.285713
-offset_top = -37.14286
-offset_right = 59.428566
-offset_bottom = 35.999992
-theme = SubResource("Theme_6ligt")
+[node name="ValueLabel" type="Label" parent="." unique_id=2037145400]
+offset_left = -58.2857
+offset_top = -37.1429
+offset_right = 59.4286
+offset_bottom = 36.0
+theme = SubResource("Theme_sy11y")
 theme_override_colors/font_color = Color(0, 0, 0, 1)
 label_settings = ExtResource("4_kg30u")
 

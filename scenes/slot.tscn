@@ -2,7 +2,7 @@
 
 [ext_resource type="Script" uid="uid://dwfu72os73hd3" path="res://scripts/slot.gd" id="1_4v6ba"]
 
-[node name="Slot1" type="Node2D" unique_id=500646857]
+[node name="Slot1" type="Node2D" unique_id=614059248]
 script = ExtResource("1_4v6ba")
 
-[node name="SlotGraphic" type="Sprite2D" parent="." unique_id=1721407504]
+[node name="SlotGraphic" type="Sprite2D" parent="." unique_id=987867327]

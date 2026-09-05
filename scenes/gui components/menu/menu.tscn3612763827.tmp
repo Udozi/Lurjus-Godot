@@ -1,0 +1,18 @@
+[gd_scene format=3 uid="uid://b4ovxfa4gelj3"]
+
+[ext_resource type="Script" uid="uid://doa8tcx0iiiug" path="res://scripts/gui components/menu/menu.gd" id="1_a7j1s"]
+[ext_resource type="PackedScene" uid="uid://dvhb3hskrlpb6" path="res://scenes/room.tscn" id="1_l0vtl"]
+[ext_resource type="Resource" uid="uid://70ms57quwy61" path="res://resources/events.tres" id="2_aj3wx"]
+[ext_resource type="Texture2D" uid="uid://dlkym4f4iecwc" path="res://resources/art/bg/menu_bg.png" id="2_my0ii"]
+
+[node name="Menu" type="Node2D" unique_id=364543051]
+script = ExtResource("1_a7j1s")
+events = ExtResource("2_aj3wx")
+
+[node name="MenuUI" type="CanvasLayer" parent="." unique_id=204108475]
+
+[node name="Room" parent="MenuUI" unique_id=230425454 instance=ExtResource("1_l0vtl")]
+
+[node name="Sprite2D" type="Sprite2D" parent="." unique_id=1510758392]
+texture = ExtResource("2_my0ii")
+centered = false

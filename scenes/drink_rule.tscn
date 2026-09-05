@@ -1,0 +1,60 @@
+[gd_scene format=3 uid="uid://f06tv6fp21cv"]
+
+[ext_resource type="Texture2D" uid="uid://ra14mgkfspjm" path="res://resources/art/bg/lager.png" id="1_6sxjn"]
+[ext_resource type="Script" uid="uid://d06ih0vm4k7i4" path="res://scripts/drinkrule.gd" id="1_ydx88"]
+[ext_resource type="Theme" uid="uid://b0btqntjftj45" path="res://resources/themes/button_text.tres" id="3_n3vns"]
+
+[sub_resource type="Theme" id="Theme_arp2o"]
+
+[sub_resource type="SystemFont" id="SystemFont_ux5qa"]
+subpixel_positioning = 0
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_82cfe"]
+
+[node name="DrinkRule" type="Panel" unique_id=734035491]
+offset_left = 607.0
+offset_top = 875.0
+offset_right = 1544.0
+offset_bottom = 1043.0
+script = ExtResource("1_ydx88")
+
+[node name="Rule" type="Label" parent="." unique_id=1121078230]
+visible = false
+layout_mode = 0
+offset_left = 218.0
+offset_top = 5.0
+offset_right = 928.0
+offset_bottom = 142.0
+theme = SubResource("Theme_arp2o")
+theme_override_fonts/font = SubResource("SystemFont_ux5qa")
+theme_override_font_sizes/font_size = 100
+theme_override_styles/focus = SubResource("StyleBoxEmpty_82cfe")
+text = "Drink"
+horizontal_alignment = 1
+
+[node name="Total" type="Label" parent="." unique_id=1035689668]
+visible = false
+layout_mode = 0
+offset_left = 520.0
+offset_top = 132.0
+offset_right = 648.0
+offset_bottom = 159.0
+text = "This game total: "
+
+[node name="Drink" type="Sprite2D" parent="." unique_id=1453806805]
+position = Vector2(100, 85)
+scale = Vector2(1.5, 1.5)
+texture = ExtResource("1_6sxjn")
+
+[node name="StartInfo" type="Label" parent="." unique_id=428967404]
+layout_mode = 0
+offset_left = 177.0
+offset_top = 12.0
+offset_right = 919.0
+offset_bottom = 151.0
+theme = ExtResource("3_n3vns")
+theme_override_font_sizes/font_size = 22
+text = "                                                       Rules:
+1. Whenever you waste HP from Hearts, drink that many sips
+2. Whenever you discard an unused weapon, drink equal to its power
+3. If you lose before reaching the end of draw pile, take a shot!"

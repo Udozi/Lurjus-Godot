@@ -1,9 +1,13 @@
-[gd_resource type="Resource" script_class="Events" format=3 uid="uid://70ms57quwy61"]
+[gd_resource type="Resource" script_class="Events" load_steps=3 format=3 uid="uid://70ms57quwy61"]
 
 [ext_resource type="PackedScene" uid="uid://c3ce4jc8i8ij4" path="res://scenes/draw_pile.tscn" id="2_15ltn"]
 [ext_resource type="Script" uid="uid://e237hvklg7k3" path="res://scripts/events.gd" id="2_63gdt"]
 
 [resource]
 script = ExtResource("2_63gdt")
+spades = 13
+clubs = 13
+hearts = 9
+diamonds = 9
 draw_pile_tscn = ExtResource("2_15ltn")
 metadata/_custom_type_script = "uid://e237hvklg7k3"

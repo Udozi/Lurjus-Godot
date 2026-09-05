@@ -1,12 +1,10 @@
 [gd_resource type="LabelSettings" format=3 uid="uid://m7m108i46av0"]
 
-[sub_resource type="SystemFont" id="SystemFont_b121j"]
-font_names = PackedStringArray("Dirt Road")
+[sub_resource type="SystemFont" id="SystemFont_mx86v"]
 
 [sub_resource type="FontVariation" id="FontVariation_8c41q"]
-base_font = SubResource("SystemFont_b121j")
+base_font = SubResource("SystemFont_mx86v")
 
 [resource]
 font = SubResource("FontVariation_8c41q")
 font_size = 148
-font_color = Color(0.7411765, 0.7176471, 0.7529412, 1)

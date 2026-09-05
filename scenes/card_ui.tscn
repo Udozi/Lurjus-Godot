@@ -1,11 +1,7 @@
 [gd_scene format=3 uid="uid://dm40migfgra3b"]
 
 [ext_resource type="Script" uid="uid://b2l71e4v7w8n7" path="res://scripts/card_ui.gd" id="1_xou0u"]
-[ext_resource type="Script" uid="uid://bc1fpsktq023" path="res://scripts/card_state_machine.gd" id="2_2iqob"]
-[ext_resource type="Script" uid="uid://xu8sa5dhhl7q" path="res://scripts/states/card_mouseover_state.gd" id="3_8creq"]
-[ext_resource type="Script" uid="uid://duf1uacnvl7w7" path="res://scripts/states/card_pressed_state.gd" id="4_gf8qa"]
-[ext_resource type="Script" uid="uid://y3flc8ufiyti" path="res://scripts/states/card_animated_state.gd" id="5_cgy8f"]
-[ext_resource type="Script" uid="uid://dxucf1tw6ka50" path="res://scripts/states/card_passive_state.gd" id="7_psiuq"]
+[ext_resource type="PackedScene" uid="uid://cgkrixm6qp1i8" path="res://scenes/card_state_machine.tscn" id="2_birkm"]
 
 [node name="CardUI" type="Control" unique_id=2058714055]
 custom_minimum_size = Vector2(40, 40)
@@ -16,26 +12,4 @@ offset_bottom = 40.0
 mouse_filter = 2
 script = ExtResource("1_xou0u")
 
-[node name="CardStateMachine" type="Node" parent="." unique_id=490898135 node_paths=PackedStringArray("initial_state")]
-script = ExtResource("2_2iqob")
-initial_state = NodePath("SleepingState")
-metadata/_custom_type_script = "uid://7vqpeq06jcwn"
-
-[node name="PassiveState" type="Node" parent="CardStateMachine" unique_id=563655249]
-script = ExtResource("7_psiuq")
-
-[node name="MouseoverState" type="Node" parent="CardStateMachine" unique_id=1292812448]
-script = ExtResource("3_8creq")
-state = 1
-
-[node name="PressedState" type="Node" parent="CardStateMachine" unique_id=932939605]
-script = ExtResource("4_gf8qa")
-state = 2
-
-[node name="AnimatedState" type="Node" parent="CardStateMachine" unique_id=1914547230]
-script = ExtResource("5_cgy8f")
-state = 3
-
-[node name="SleepingState" type="Node" parent="CardStateMachine" unique_id=1300848223]
-script = ExtResource("5_cgy8f")
-state = 3
+[node name="CardStateMachine" parent="." unique_id=583251812 instance=ExtResource("2_birkm")]

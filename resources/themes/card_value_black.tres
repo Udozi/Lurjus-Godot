@@ -1,0 +1,9 @@
+[gd_resource type="LabelSettings" format=3 uid="uid://bpf2dypw237c8"]
+
+[sub_resource type="FontVariation" id="FontVariation_dpmqr"]
+variation_embolden = 0.5
+
+[resource]
+font = SubResource("FontVariation_dpmqr")
+font_size = 30
+font_color = Color(0, 0, 0, 1)

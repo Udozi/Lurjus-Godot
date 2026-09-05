@@ -1,0 +1,9 @@
+[gd_resource type="LabelSettings" format=3 uid="uid://b6jeo0ons6j53"]
+
+[sub_resource type="FontVariation" id="FontVariation_8i750"]
+variation_embolden = 0.5
+
+[resource]
+font = SubResource("FontVariation_8i750")
+font_size = 30
+font_color = Color(1, 0, 0, 1)

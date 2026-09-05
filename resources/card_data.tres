@@ -1,8 +1,15 @@
 [gd_resource type="Resource" script_class="CardData" format=3 uid="uid://buk0g6oay5ebl"]
 
 [ext_resource type="Script" uid="uid://blgo34yg7ktqh" path="res://scripts/card_data.gd" id="1_q1lyp"]
+[ext_resource type="Resource" uid="uid://cnd5kqlehpcdx" path="res://resources/powerup_handler.tres" id="1_x815k"]
 
 [resource]
 resource_local_to_scene = true
 script = ExtResource("1_q1lyp")
+suit = null
+index = null
+skip_animation = null
+animation_going = null
+menu_function = null
+powerup_handler = ExtResource("1_x815k")
 metadata/_custom_type_script = "uid://blgo34yg7ktqh"

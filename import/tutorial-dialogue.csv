@@ -1,0 +1,8 @@
+
+Play cards by pressing W,A,S,D or clicking them. Clubs and Spades are enemies. Playing them subtracts your health. Play cards to advance to the next room./false
+Playing Hearts recovers your health. You can only heal once per room. Your maximum health is 20 by default. The round ends if your health drops to 0 or below./false
+You may flee from a full room by pressing SPACE or clicking the draw pile, but not twice in a row. Upon fleeing, cards are shuffled to the bottom of the deck./true
+Diamonds are weapons that subtract their value from the damage you take from enemies. Picking up a new weapon discards the old one.
+The last enemy beaten with the weapon acts as the weapon's Durability. You can only use the weapon against enemies with lesser value than it. 
+You can toggle your equipped weapon by pressing LSHIFT or clicking it. You may advance (SPACE) when there are less than two cards left in the room.
+The round is completed when there are no cards left in the draw pile or the room.

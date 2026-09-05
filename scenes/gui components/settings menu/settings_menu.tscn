@@ -1,24 +1,34 @@
 [gd_scene format=3 uid="uid://btwemupq6qsip"]
 
 [ext_resource type="Script" uid="uid://c4xfvlokv8rvy" path="res://scripts/gui components/settings menu/settings_menu.gd" id="1_nmvij"]
+[ext_resource type="Resource" uid="uid://70ms57quwy61" path="res://resources/events.tres" id="2_tubwm"]
 
 [sub_resource type="LabelSettings" id="LabelSettings_nmvij"]
 font_size = 48
 
 [node name="Settings Menu" type="Control" unique_id=22959632]
-z_index = 999
 layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_nmvij")
+events = ExtResource("2_tubwm")
+
+[node name="Panel" type="Panel" parent="." unique_id=537990857]
+layout_mode = 1
 anchors_preset = 8
 anchor_left = 0.5
 anchor_top = 0.5
 anchor_right = 0.5
 anchor_bottom = 0.5
+offset_left = -100.0
+offset_top = -116.5
+offset_right = 150.0
+offset_bottom = 183.5
 grow_horizontal = 2
 grow_vertical = 2
-script = ExtResource("1_nmvij")
-
-[node name="Panel" type="Panel" parent="." unique_id=537990857]
-layout_mode = 1
 
 [node name="HBoxContainer" type="HBoxContainer" parent="Panel" unique_id=2037723880]
 layout_mode = 1
@@ -46,6 +56,13 @@ custom_minimum_size = Vector2(200, 50)
 layout_mode = 2
 size_flags_horizontal = 4
 size_flags_vertical = 0
+alignment = 1
+
+[node name="FullScreen" type="CheckBox" parent="Panel/HBoxContainer/VBoxContainer" unique_id=1022951973]
+layout_mode = 2
+size_flags_horizontal = 4
+focus_neighbor_top = NodePath("../OptionButton")
+text = "Fullscreen"
 
 [node name="ResumeButton" type="Button" parent="Panel/HBoxContainer/VBoxContainer" unique_id=1630156865]
 layout_mode = 2
@@ -62,6 +79,7 @@ focus_neighbor_top = NodePath("../OptionButton")
 text = "Exit game"
 
 [connection signal="item_selected" from="Panel/HBoxContainer/VBoxContainer/OptionButton" to="." method="_on_option_button_item_selected"]
+[connection signal="toggled" from="Panel/HBoxContainer/VBoxContainer/FullScreen" to="." method="_on_full_screen_toggled"]
 [connection signal="pressed" from="Panel/HBoxContainer/VBoxContainer/ResumeButton" to="." method="_on_resume_button_pressed"]
 [connection signal="pressed" from="Panel/HBoxContainer/VBoxContainer/MenuButton" to="." method="_on_menu_button_pressed"]
 [connection signal="pressed" from="Panel/HBoxContainer/VBoxContainer/QuitButton" to="." method="_on_quit_button_pressed"]

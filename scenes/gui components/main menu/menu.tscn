@@ -1,19 +1,19 @@
-[gd_scene format=3 uid="uid://b4ovxfa4gelj3"]
+[gd_scene load_steps=5 format=3 uid="uid://b4ovxfa4gelj3"]
 
 [ext_resource type="Script" uid="uid://doa8tcx0iiiug" path="res://scripts/gui components/menu/menu.gd" id="1_8hihf"]
 [ext_resource type="Resource" uid="uid://70ms57quwy61" path="res://resources/events.tres" id="2_gf5qb"]
 [ext_resource type="PackedScene" uid="uid://dvhb3hskrlpb6" path="res://scenes/room.tscn" id="3_1cniq"]
 [ext_resource type="Texture2D" uid="uid://dlkym4f4iecwc" path="res://resources/art/bg/menu_bg.png" id="4_1cniq"]
 
-[node name="Menu" type="Node2D" unique_id=364543051 node_paths=PackedStringArray("room")]
+[node name="Menu" type="Node2D" node_paths=PackedStringArray("room")]
 script = ExtResource("1_8hihf")
 events = ExtResource("2_gf5qb")
 room = NodePath("MenuUI/Room")
 
-[node name="MenuUI" type="CanvasLayer" parent="." unique_id=204108475]
+[node name="MenuUI" type="CanvasLayer" parent="."]
 
-[node name="Room" parent="MenuUI" unique_id=230425454 instance=ExtResource("3_1cniq")]
+[node name="Room" parent="MenuUI" instance=ExtResource("3_1cniq")]
 
-[node name="Sprite2D" type="Sprite2D" parent="." unique_id=1510758392]
+[node name="Sprite2D" type="Sprite2D" parent="."]
 texture = ExtResource("4_1cniq")
 centered = false

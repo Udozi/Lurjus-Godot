@@ -3,17 +3,17 @@
 [ext_resource type="Script" uid="uid://clh301gl7c6t0" path="res://scripts/room.gd" id="1_88gup"]
 [ext_resource type="PackedScene" uid="uid://dmg7gnqeyfpnv" path="res://scenes/slot.tscn" id="2_ffxv4"]
 
-[node name="Room" type="Node2D" unique_id=230425454 node_paths=PackedStringArray("slot_w", "slot_a", "slot_s", "slot_d")]
+[node name="Room" type="Node2D" unique_id=2111929487 node_paths=PackedStringArray("slot_w", "slot_a", "slot_s", "slot_d")]
 script = ExtResource("1_88gup")
 slot_w = NodePath("SlotW")
 slot_a = NodePath("SlotA")
 slot_s = NodePath("SlotS")
 slot_d = NodePath("SlotD")
 
-[node name="SlotW" parent="." unique_id=500646857 instance=ExtResource("2_ffxv4")]
+[node name="SlotW" parent="." unique_id=1131656987 instance=ExtResource("2_ffxv4")]
 
-[node name="SlotA" parent="." unique_id=249312953 instance=ExtResource("2_ffxv4")]
+[node name="SlotA" parent="." unique_id=927829880 instance=ExtResource("2_ffxv4")]
 
-[node name="SlotS" parent="." unique_id=525288828 instance=ExtResource("2_ffxv4")]
+[node name="SlotS" parent="." unique_id=2065749503 instance=ExtResource("2_ffxv4")]
 
-[node name="SlotD" parent="." unique_id=307779142 instance=ExtResource("2_ffxv4")]
+[node name="SlotD" parent="." unique_id=244457009 instance=ExtResource("2_ffxv4")]

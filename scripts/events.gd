@@ -1,6 +1,8 @@
 class_name Events
 extends Resource
 
+signal hide_menus
+
 @export_group("Cards per suit")
 @export var spades : int = 13
 @export var clubs : int = 13
@@ -9,14 +11,8 @@ extends Resource
 
 @export var draw_pile_tscn: PackedScene
 
-
-var one_of_all = { 
-	"spades":1,
-	"clubs":1,
-	"hearts":1,
-	"diamonds":1,
-	"dummy":1
-}
+var tutorial_deck_path: String = "res://import/tutorial-deck.csv"
+var draw_pile: DrawPile
 
 
 var suits_and_cards = {
@@ -27,42 +23,101 @@ var suits_and_cards = {
 }
 
 
+func read_csv(file_path):
+	
+	var content : Array = []
+	var file = FileAccess.open(file_path, FileAccess.READ)
+	
+	while !file.eof_reached():
+		var line = file.get_line()
+		var splitline = line.split(",")
+		if len(splitline) > 1: content.append(splitline)
+	
+	file.close()
+	
+	return content
+	
+
 func open_menu(menu_content):
 	
-	MenuDeck.create_deck(one_of_all, menu_content)
+	MenuDeck.create_deck(suits_and_cards, menu_content)
 	
-	var draw_pile = start_level(MenuDeck, false)
+	draw_pile = start_level(MenuDeck, false)
 
 	return draw_pile
 
 
 func start_game():
 	
-	Player.reset()
 	GameState.reset()
+	Player.reset()
 	
-	PlayingDeck.create_deck(suits_and_cards)	
+	if GameState.game_mode == GameState.game_modes.ADVENTURE:
+		if len(PlayingDeck.cards) > 0:
+			PlayingDeck.create_deck(suits_and_cards,null,[],PlayingDeck)
+			
+		else:
+			PlayingDeck.create_deck(suits_and_cards)
+		
+	else:
+		GameState.game_mode = GameState.game_modes.QUICKGAME
+		PlayingDeck.create_deck(suits_and_cards)
 	
-	var draw_pile = start_level(PlayingDeck)
+	hide_menus.emit()
+	draw_pile = start_level(PlayingDeck)
+	return draw_pile
+
+
+func start_custom_game(path = tutorial_deck_path):
+	
+	GameState.reset()
+	Player.reset()
+	
+	GameState.game_mode = GameState.game_modes.CUSTOMGAME
+	var content = read_csv(path)
+	PlayingDeck.create_deck(suits_and_cards,false,content)		
+	
+	hide_menus.emit()
+	draw_pile = start_level(PlayingDeck, false)
+	return draw_pile
+
+
+func resume_level():
+	draw_pile = draw_pile_tscn.instantiate()
+	return draw_pile
+
+
+func next_level():
+	
+	GameState.reset()
+	Player.next_level()
+	
+	var adventure_deck = AdventureState.load_deck()
+	PlayingDeck.create_deck(suits_and_cards,null,[],adventure_deck)
+	draw_pile = start_level(PlayingDeck)
+	
 	return draw_pile
 
 
 func start_level(playing_deck, shuffle = true):
 	
-	var draw_pile = draw_pile_tscn.instantiate()
+	draw_pile = draw_pile_tscn.instantiate()
 	
+	for card in playing_deck.cards:		
+		if card: 
+			draw_pile.cards.append(card)
 	
-	for card in playing_deck.cards:
-		draw_pile.cards.append(card)
+	for card in draw_pile.cards:
+		
+		if card.get_parent(): card.reparent(draw_pile)
+		else: draw_pile.add_child(card)
+		
+		if !card.card_ui.get_parent():
+			card.add_child(card.card_ui)
 	
 	if shuffle: draw_pile.cards.shuffle()
 	else: draw_pile.cards.reverse()
 	
-	for card in draw_pile.cards:
-		draw_pile.add_child(card)
-		
-		card.add_child(card.card_ui)
-
 	return draw_pile
 
 	

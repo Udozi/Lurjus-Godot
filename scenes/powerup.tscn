@@ -1,0 +1,6 @@
+[gd_scene format=3 uid="uid://o4p03lckegui"]
+
+[ext_resource type="Script" uid="uid://cojkgiboupwup" path="res://scripts/powerup.gd" id="1_8vsy1"]
+
+[node name="Powerup" type="Node" unique_id=535632754]
+script = ExtResource("1_8vsy1")
